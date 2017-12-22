@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bludevs.twotor.TutorReq">
+
+    <TextView
+        android:id="@+id/ReqTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Course Request"
+        android:textColor="#FFF"
+        android:textSize="28sp"
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.036"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp" />
+
+    <EditText
+        android:id="@+id/eTopic"
+        android:layout_width="222dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="Topic"
+        android:textColorHint="@color/colorAccent"
+        android:maxLength="20"
+        android:inputType="textPersonName"
+        android:layout_marginTop="28dp"
+        app:layout_constraintTop_toBottomOf="@+id/ReqTitle"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp" />
+
+    <EditText
+        android:id="@+id/eExtra"
+        android:layout_width="222dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName"
+        android:textColorHint="@color/colorAccent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/eTopic"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="8dp" />
+
+    <Spinner
+        android:id="@+id/Subjectspinner"
+        android:layout_width="222dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="33dp"
+        android:backgroundTint="@color/colorAccent"
+        android:foregroundTint="@android:color/background_dark"
+        app:layout_constraintHorizontal_bias="0.106"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eExtra" />
+
+    <Button
+        android:id="@+id/bOK"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:text="OK"
+        android:background="@android:color/background_dark"
+        android:textColor="@color/colorAccent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="110dp"
+        app:layout_constraintTop_toBottomOf="@+id/Subjectspinner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:text="Date"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/Subjectspinner"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.06" />
+
+</android.support.constraint.ConstraintLayout>

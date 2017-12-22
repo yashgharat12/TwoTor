@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "1010403431180",
+    "firebase_url": "https://twotor-187114.firebaseio.com",
+    "project_id": "twotor-187114",
+    "storage_bucket": "twotor-187114.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010403431180:android:4401727d1e344101",
+        "android_client_info": {
+          "package_name": "com.bludevs.twotor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010403431180-sv86bce73kl7q0uurncu0rqg1j0qnhug.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1010403431180-gc8338lpd42pvages7e6qsdgjelvas98.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1010403431180-tvo5lan86a6069j8cp3acbigantvv7io.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bludevs.twotor",
+            "certificate_hash": "24cae632cda01dda891890f66908d1e9922c8ce6"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSFFRf5jLDX1AbO8PVHvRqAnA6ma5ihAY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010403431180-sv86bce73kl7q0uurncu0rqg1j0qnhug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Subjects_array">
+
+        <item>Biology</item>
+        <item>Chemistry</item>
+        <item>Physics</item>
+        <item>Geometry</item>
+        <item>Algebra II</item>
+        <item>Pre-Calculus</item>
+        <item>Calculus</item>
+        <item>Statistics</item>
+        <item>Humanities</item>
+        <item>Electives</item>
+    </string-array>
+</resources>

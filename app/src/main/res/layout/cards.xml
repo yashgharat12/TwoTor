@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    card_view:cardCornerRadius="4dp"
+    android:layout_margin="5dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/card_dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            card_view:srcCompat="@drawable/googleg_standard_color_18"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="16dp"
+            card_view:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/card_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/card_dp"
+            android:layout_toEndOf="@+id/card_dp"
+            android:layout_toRightOf="@+id/card_dp"
+            android:text="Name"
+            android:textSize="16sp"
+            card_view:layout_constraintLeft_toRightOf="@+id/card_dp"
+            android:layout_marginLeft="16dp"
+            card_view:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="37dp" />
+
+        <TextView
+            android:id="@+id/card_topic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/card_dp"
+            android:layout_alignStart="@+id/card_dp"
+            android:layout_below="@+id/card_dp"
+            android:text="Topic"
+            android:layout_marginTop="17dp"
+            card_view:layout_constraintTop_toBottomOf="@+id/card_dp"
+            android:layout_marginLeft="16dp"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="8dp"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.0" />
+
+        <TextView
+            android:id="@+id/card_desc"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/card_topic"
+            android:layout_alignStart="@+id/card_topic"
+            android:layout_below="@+id/card_topic"
+            android:text="Description"
+            android:layout_weight="1"
+            android:singleLine="false"
+            android:layout_marginTop="14dp"
+            android:scrollHorizontally="false"
+            card_view:layout_constraintTop_toBottomOf="@+id/card_topic"
+            android:layout_marginLeft="16dp"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintRight_toLeftOf="@+id/card_date"
+            android:layout_marginRight="8dp"
+            card_view:layout_constraintHorizontal_bias="0.0" />
+
+        <TextView
+            android:id="@+id/card_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/card_desc"
+            android:layout_alignStart="@+id/card_desc"
+            android:layout_below="@+id/card_desc"
+            android:text="Date"
+            android:layout_marginRight="69dp"
+            card_view:layout_constraintRight_toRightOf="parent"
+            android:layout_marginLeft="8dp"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintHorizontal_bias="1.0"
+            card_view:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="114dp" />
+
+        <Button
+            android:id="@+id/bAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:textColor="@color/colorAccent"
+            android:background="@android:color/background_dark"
+
+            android:text="Accept"
+            android:layout_alignBottom="@+id/card_date"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/card_desc"
+            android:layout_marginTop="13dp"
+            card_view:layout_constraintTop_toBottomOf="@+id/card_date"
+            android:layout_marginRight="10dp"
+            card_view:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/card_subj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/card_name"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="Subject"
+            android:textSize="16sp"
+            android:layout_marginRight="8dp"
+            card_view:layout_constraintRight_toRightOf="parent"
+            card_view:layout_constraintLeft_toRightOf="@+id/card_name"
+            android:layout_marginLeft="8dp"
+            card_view:layout_constraintHorizontal_bias="0.953"
+            card_view:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="37dp" />
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</android.support.v7.widget.CardView>
