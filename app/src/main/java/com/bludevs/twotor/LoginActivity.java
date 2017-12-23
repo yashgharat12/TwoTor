@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
@@ -27,9 +29,10 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final int REQ_CODE = 6969;
-    public static GoogleApiClient googleAPIClient;
     public static String Name = "", Email = "", prof = "";
     private FirebaseAuth mAuth;
+    private GoogleSignInClient mGSC;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +41,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Button bLogin = (Button) findViewById(R.id.bLogin);
 
         mAuth = FirebaseAuth.getInstance();
-        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        googleAPIClient = new GoogleApiClient.Builder(this).addApi(Auth.GOOGLE_SIGN_IN_API,options).build();
-        googleAPIClient.connect();
+        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGSC = GoogleSignIn.getClient(LoginActivity.this, options);
+        mAuth = FirebaseAuth.getInstance();
+
+        //googleAPIClient = new GoogleApiClient.Builder(this).addApi(Auth.GOOGLE_SIGN_IN_API,options).build();
+        //googleAPIClient.connect();
         bLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -51,8 +61,33 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+    }
+
+    private void firebaseAuthGoogle(GoogleSignInAccount acct) {
+        AuthCredential creds = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mAuth.signInWithCredential(creds).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    // Sign in success, update UI with the signed-in user's information
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    updateUI(true);
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.e("LOGIN: ", "FAILED");
+                }
+            }
+        });
+    }
+
     private void signIn(){
-        Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleAPIClient);
+        Intent intent = mGSC.getSignInIntent();
         startActivityForResult(intent, REQ_CODE);
         }
     private void handleResult(GoogleSignInResult result){
