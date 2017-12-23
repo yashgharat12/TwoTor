@@ -15,17 +15,15 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.bludevs.twotor.LoginActivity.prof;
-
 /**
  * Created by Nightwing on 12/22/2017.
  */
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestViewHolder> {
 
-    private List<RequestMessage> requestList = new ArrayList<>();
-    private final Activity activity;
     public static Activity acti;
+    private final Activity activity;
+    private List<RequestMessage> requestList = new ArrayList<>();
 
     public RequestAdapter(Activity act) {
         activity = act;
@@ -82,6 +80,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             card_topic.setText(rm.topic);
             card_desc.setText(rm.desc);
             card_subj.setText(rm.subj);
+            card_date.setText(rm.date);
         }
 
     }

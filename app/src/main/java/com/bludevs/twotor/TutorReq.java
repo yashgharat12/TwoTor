@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class TutorReq extends AppCompatActivity {
-    public String final_topic, final_desc, final_subj;
+    public String final_topic, final_desc, final_subj, final_date;
     Spinner subjSpin;
     private SwitchDateTimeDialogFragment dateTimeFragment;
 
@@ -50,11 +50,12 @@ public class TutorReq extends AppCompatActivity {
                 final_topic = topic.getText().toString();
                 final_desc = desc.getText().toString();
                 final_subj = subjSpin.getSelectedItem().toString();
+                final_date = dateText.getText().toString();
 
                 RequestMessage request = new RequestMessage(
                         SaveSharedPreferences.getProf(TutorReq.this),
                         SaveSharedPreferences.getName(TutorReq.this),
-                        final_topic,final_desc,final_subj);
+                        final_topic, final_desc, final_subj, final_date);
                 RequestAdapter adapter = Request_tab.adapt;
                 adapter.addRequest(request);
 

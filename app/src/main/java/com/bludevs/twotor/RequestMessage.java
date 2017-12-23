@@ -14,13 +14,13 @@ public class RequestMessage {
 
     }
 
-    public RequestMessage(String imgURL, String name, String topic, String desc, String subj){
+    public RequestMessage(String imgURL, String name, String topic, String desc, String subj, String date) {
         this.imgURL = imgURL;
         this.name = name;
         this.topic = topic;
         this.desc = desc;
         this.subj = subj;
-        //this.date = date;
+        this.date = date;
     }
 
     public void msgStatus(Boolean b){
