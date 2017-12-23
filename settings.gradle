@@ -1,1 +1,2 @@
-include ':app', 'SlideDateTimePicker'
+include ':app', ':switchdatetime'
+project(':switchdatetime').projectDir = new File('Android-SwitchDateTimePicker/switchdatetime')

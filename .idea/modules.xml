@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SlideDateTimePicker/SlideDateTimePicker.iml" filepath="$PROJECT_DIR$/SlideDateTimePicker/SlideDateTimePicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/TwoTor.iml" filepath="$PROJECT_DIR$/TwoTor.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Android-SwitchDateTimePicker/switchdatetime/switchdatetime.iml" filepath="$PROJECT_DIR$/Android-SwitchDateTimePicker/switchdatetime/switchdatetime.iml" />
     </modules>
   </component>
 </project>
