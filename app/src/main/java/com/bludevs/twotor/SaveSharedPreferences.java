@@ -3,13 +3,13 @@ package com.bludevs.twotor;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 public class SaveSharedPreferences {
-    public static Boolean IS_LOGGED_IN = false;
     static final String PREF_USER = "username";
     static final String PREF_NAME = "name";
     static final String PREF_PROF = "URL";
+    public static Boolean IS_LOGGED_IN = false;
+
     static SharedPreferences getSharedPreferences(Context ctx){
         return PreferenceManager.getDefaultSharedPreferences(ctx);
     }
