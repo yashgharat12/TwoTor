@@ -95,13 +95,16 @@
 
             android:layout_alignParentRight="true"
             android:layout_below="@+id/card_desc"
+            android:layout_marginBottom="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="21dp"
+            android:layout_marginTop="8dp"
             android:background="@android:color/background_dark"
             android:text="Accept"
             android:textColor="@color/colorAccent"
+            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintRight_toRightOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/card_date" />
+            card_view:layout_constraintTop_toBottomOf="@+id/card_date"
+            card_view:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/card_subj"
