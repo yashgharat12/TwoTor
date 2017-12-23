@@ -9,13 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -118,8 +118,27 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onActivityResult(reqCode,resCode,data);
 
         if(reqCode == REQ_CODE){
-            GoogleSignInResult res = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleResult(res);
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            GoogleSignInAccount account = null;
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Log.w("LOGIN", "Google sign in failed", e);
+                // [START_EXCLUDE]
+                // [END_EXCLUDE]
+            }
+
+            Name = account.getDisplayName();
+            Email = account.getEmail();
+            prof = account.getPhotoUrl().toString();
+            SaveSharedPreferences.setPrefUser(this, Email);
+            SaveSharedPreferences.setName(this, Name);
+            SaveSharedPreferences.setProf(this, prof);
+            updateUI(true);
 
         }
     }
