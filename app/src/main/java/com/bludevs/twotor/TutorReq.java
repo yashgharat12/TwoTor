@@ -1,16 +1,18 @@
 package com.bludevs.twotor;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class TutorReq extends AppCompatActivity {
-    Spinner subjSpin;
     public String final_topic, final_desc, final_subj;
+    Spinner subjSpin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,9 @@ public class TutorReq extends AppCompatActivity {
 
         final EditText topic = (EditText) findViewById(R.id.eTopic);
         final EditText desc = (EditText) findViewById(R.id.eExtra);
+        final TextView date = (TextView) findViewById(R.id.Date);
 
+        Button bDate = (Button) findViewById(R.id.bDate);
         Button bOK = (Button) findViewById(R.id.bOK);
 
         bOK.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +51,12 @@ public class TutorReq extends AppCompatActivity {
             }
         });
 
+        bDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
     }
