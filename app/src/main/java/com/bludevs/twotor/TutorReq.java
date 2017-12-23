@@ -72,7 +72,7 @@ public class TutorReq extends AppCompatActivity {
             );
         }
 
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM yyyy HH:mm", java.util.Locale.getDefault());
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy hh:mm aa", java.util.Locale.getDefault());
         dateTimeFragment.set24HoursMode(false);
         dateTimeFragment.setMinimumDateTime(new GregorianCalendar(2000, Calendar.JANUARY, 1).getTime());
         dateTimeFragment.setMaximumDateTime(new GregorianCalendar(2050, Calendar.DECEMBER, 31).getTime());
