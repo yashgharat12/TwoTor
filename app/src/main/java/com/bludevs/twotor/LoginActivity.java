@@ -116,25 +116,25 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     protected void onActivityResult(int reqCode, int resCode, Intent data){
         super.onActivityResult(reqCode,resCode,data);
+        GoogleSignInAccount acct = null;
 
         if(reqCode == REQ_CODE){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            GoogleSignInAccount account = null;
             try {
                 // Google Sign In was successful, authenticate with Firebase
-                account = task.getResult(ApiException.class);
+                GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
+                acct = account;
 
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Log.w("LOGIN", "Google sign in failed", e);
+                Log.w("LOGIN", "Google sign in failed:" + e);
                 // [START_EXCLUDE]
                 // [END_EXCLUDE]
             }
-
-            Name = account.getDisplayName();
-            Email = account.getEmail();
-            prof = account.getPhotoUrl().toString();
+            Name = acct.getDisplayName();
+            Email = acct.getEmail();
+            prof = acct.getPhotoUrl().toString();
             SaveSharedPreferences.setPrefUser(this, Email);
             SaveSharedPreferences.setName(this, Name);
             SaveSharedPreferences.setProf(this, prof);

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1010403431180-cdeteu420uabrop35ftj894vho7csnvf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bludevs.twotor",
+            "certificate_hash": "131022a10ab5fa04868f676a6dd797408e112b33"
+          }
+        },
+        {
           "client_id": "1010403431180-sv86bce73kl7q0uurncu0rqg1j0qnhug.apps.googleusercontent.com",
           "client_type": 3
         },
