@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment;
 import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment.OnButtonWithNeutralClickListener;
 
@@ -23,6 +26,9 @@ public class TutorReq extends AppCompatActivity {
     public String final_topic, final_desc, final_subj, final_date;
     Spinner subjSpin;
     private SwitchDateTimeDialogFragment dateTimeFragment;
+    private FirebaseApp app;
+    private FirebaseDatabase database;
+    private DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,10 @@ public class TutorReq extends AppCompatActivity {
         Button bDate = (Button) findViewById(R.id.bDate);
         Button bOK = (Button) findViewById(R.id.bOK);
 
+        app = FirebaseApp.getInstance();
+        database = FirebaseDatabase.getInstance(app);
+        ref = database.getReference("requests");
+
         bOK.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -56,9 +66,7 @@ public class TutorReq extends AppCompatActivity {
                         SaveSharedPreferences.getProf(TutorReq.this),
                         SaveSharedPreferences.getName(TutorReq.this),
                         final_topic, final_desc, final_subj, final_date);
-                RequestAdapter adapter = Request_tab.adapt;
-                adapter.addRequest(request);
-
+                ref.push().setValue(request);
                 finish();
             }
         });

@@ -10,14 +10,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
- public class Request_tab extends Fragment {
+
+public class Request_tab extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
      public static RequestAdapter adapt;
     private String mParam1;
     private String mParam2;
+    private FirebaseApp app;
+    private FirebaseDatabase database;
+    private DatabaseReference ref;
 
     private OnFragmentInteractionListener mListener;
 
@@ -50,7 +60,41 @@ import android.view.ViewGroup;
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.card_list);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapt = new RequestAdapter(getActivity());
+        app = FirebaseApp.getInstance();
+        database = FirebaseDatabase.getInstance(app);
+        ref = database.getReference("requests");
+
+        ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String s) {
+                RequestMessage rm = snapshot.getValue(RequestMessage.class);
+                //RequestAdapter adapt = Request_tab.adapt;
+                adapt.addRequest(rm);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         rv.setAdapter(adapt);
+
+
         return rootView;
     }
 
