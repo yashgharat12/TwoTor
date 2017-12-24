@@ -19,6 +19,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private static final int REQ_CODE = 6969;
     public static String Name = "", Email = "", prof = "";
     private FirebaseAuth mAuth;
+    private FirebaseApp app;
     private GoogleSignInClient mGSC;
 
     @Override
@@ -40,7 +42,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         Button bLogin = (Button) findViewById(R.id.bLogin);
 
-        mAuth = FirebaseAuth.getInstance();
+        app = FirebaseApp.getInstance();
+        mAuth = FirebaseAuth.getInstance(app);
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()

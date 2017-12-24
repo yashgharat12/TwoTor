@@ -15,13 +15,20 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Settings extends AppCompatActivity {
     private GoogleApiClient GPC;
+    private FirebaseApp app;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        app = FirebaseApp.getInstance();
+        mAuth = FirebaseAuth.getInstance(app);
 
         GPC = new GoogleApiClient.Builder(this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API).build();
@@ -46,6 +53,7 @@ public class Settings extends AppCompatActivity {
     }
     private void signOut(){
         if(GPC.isConnected()){
+            mAuth.signOut();
             Auth.GoogleSignInApi.signOut(GPC).setResultCallback(new ResultCallback<Status>() {
                 @Override
                 public void onResult(@NonNull Status status) {
