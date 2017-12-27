@@ -14,6 +14,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment;
@@ -21,6 +24,7 @@ import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment.OnButtonWithNeu
 
 import java.util.Date;
 import java.util.Locale;
+import java.util.UUID;
 
 public class TutorReq extends AppCompatActivity {
     public String final_topic, final_desc, final_subj, final_date;
@@ -29,6 +33,7 @@ public class TutorReq extends AppCompatActivity {
     private FirebaseApp app;
     private FirebaseDatabase database;
     private DatabaseReference ref;
+    private int ctr = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,6 @@ public class TutorReq extends AppCompatActivity {
         app = FirebaseApp.getInstance();
         database = FirebaseDatabase.getInstance(app);
         ref = database.getReference("requests");
-
         bOK.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -65,11 +69,45 @@ public class TutorReq extends AppCompatActivity {
                 RequestMessage request = new RequestMessage(
                         SaveSharedPreferences.getProf(TutorReq.this),
                         SaveSharedPreferences.getName(TutorReq.this),
-                        final_topic, final_desc, final_subj, final_date);
+                        final_topic, final_desc, final_subj, final_date,
+                        UUID.randomUUID().toString());
+
                 ref.push().setValue(request);
+                ref.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot snapshot, String s) {
+                        RequestMessage rm = snapshot.getValue(RequestMessage.class);
+                        RequestAdapter adapt = Request_tab.getAdapter();
+                        if (!adapt.checkList(rm)) {
+                            adapt.addRequest(rm);
+                        }
+
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 finish();
             }
         });
+
 
         dateTimeFragment = (SwitchDateTimeDialogFragment) getSupportFragmentManager().findFragmentByTag("TAG_DATETIME_FRAGMENT");
         if (dateTimeFragment == null) {

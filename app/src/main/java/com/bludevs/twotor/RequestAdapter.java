@@ -15,10 +15,6 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Nightwing on 12/22/2017.
- */
-
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestViewHolder> {
 
     public static Activity acti;
@@ -34,6 +30,26 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
     public void addRequest(RequestMessage request){
         requestList.add(request);
         notifyItemInserted(requestList.size());
+        Log.i("COUNT:", Integer.toString(requestList.size()));
+    }
+
+    public Boolean checkList(RequestMessage rm) {
+        Boolean chk = false;
+        for (int i = 0; i < requestList.size(); i++) {
+            RequestMessage entry = requestList.get(i);
+            if (!(entry == null)) {
+                Log.i("UPDATE", "not null");
+            }
+            if (requestList.size() > 0) {
+                Log.i("UPDATE", Integer.toString(requestList.size()));
+                Log.i("UPDATE", entry.ID);
+                if (entry.ID.equals(rm.ID)) {
+                    chk = true;
+                } else {
+                }
+            }
+        }
+        return chk;
     }
 
 

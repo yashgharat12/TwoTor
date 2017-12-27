@@ -11,9 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,7 +19,7 @@ public class Request_tab extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-     public static RequestAdapter adapt;
+    private static RequestAdapter adapt;
     private String mParam1;
     private String mParam2;
     private FirebaseApp app;
@@ -44,6 +41,10 @@ public class Request_tab extends Fragment {
         return fragment;
     }
 
+    public static RequestAdapter getAdapter() {
+        return adapt;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,35 +64,7 @@ public class Request_tab extends Fragment {
         app = FirebaseApp.getInstance();
         database = FirebaseDatabase.getInstance(app);
         ref = database.getReference("requests");
-
-        ref.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot snapshot, String s) {
-                RequestMessage rm = snapshot.getValue(RequestMessage.class);
-                //RequestAdapter adapt = Request_tab.adapt;
-                adapt.addRequest(rm);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        ref.keepSynced(true);
         rv.setAdapter(adapt);
 
 
@@ -121,7 +94,6 @@ public class Request_tab extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
 
      public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
