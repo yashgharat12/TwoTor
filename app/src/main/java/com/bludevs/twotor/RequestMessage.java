@@ -1,8 +1,5 @@
 package com.bludevs.twotor;
 
-/**
- * Created by Nightwing on 12/21/2017.
- */
 
 public class RequestMessage {
 

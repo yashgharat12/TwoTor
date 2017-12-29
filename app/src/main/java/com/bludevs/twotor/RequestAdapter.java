@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -30,20 +33,27 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
         return activity;
     }
 
+    public static void sortRequests(List<RequestMessage> list){
+        Collections.sort(list, new Comparator<RequestMessage>() {
+            DateFormat f = new SimpleDateFormat(
+                    "MMM d, yyyy hh:mm aa", java.util.Locale.getDefault());
+            @Override
+            public int compare(RequestMessage o1, RequestMessage o2) {
+                int ret = 0;
+                try {
+                    ret = f.parse(o1.date).compareTo(f.parse(o2.date));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return ret;
+            }
+        });
+    }
+
     public void addRequest(RequestMessage request) {
         requestList.add(request);
         notifyItemInserted(requestList.size());
         //sortRequests(requestList);
-    }
-
-    public static void sortRequests(List<RequestMessage> list){
-        Collections.sort(list, new Comparator<RequestMessage>() {
-            @Override
-            public int compare(RequestMessage o1, RequestMessage o2) {
-                return o1.date.compareTo(o2.date);
-
-            }
-        });
     }
 
     public Boolean checkList(RequestMessage rm) {
