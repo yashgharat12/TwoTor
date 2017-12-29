@@ -57,7 +57,7 @@ public class Request_tab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_feed,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_requests,container,false);
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.card_list);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapt = new RequestAdapter(getActivity());
