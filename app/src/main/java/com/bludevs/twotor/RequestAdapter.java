@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestViewHolder> {
@@ -31,6 +33,17 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
     public void addRequest(RequestMessage request) {
         requestList.add(request);
         notifyItemInserted(requestList.size());
+        //sortRequests(requestList);
+    }
+
+    public static void sortRequests(List<RequestMessage> list){
+        Collections.sort(list, new Comparator<RequestMessage>() {
+            @Override
+            public int compare(RequestMessage o1, RequestMessage o2) {
+                return o1.date.compareTo(o2.date);
+
+            }
+        });
     }
 
     public Boolean checkList(RequestMessage rm) {
