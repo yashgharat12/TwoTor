@@ -46,7 +46,6 @@ public class TutorReq extends AppCompatActivity {
         subjSpin.setAdapter(adapter);
 
 
-
         final EditText topic = (EditText) findViewById(R.id.eTopic);
         final EditText desc = (EditText) findViewById(R.id.eExtra);
         final TextView dateText = (TextView) findViewById(R.id.Date);

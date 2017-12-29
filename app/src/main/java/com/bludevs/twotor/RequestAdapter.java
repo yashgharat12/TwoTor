@@ -23,6 +23,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
 
     private static Activity activity;
     private List<RequestMessage> requestList = new ArrayList<>();
+    private List<RequestMessage> filterList = new ArrayList<>();
 
     public RequestAdapter(Activity act) {
         activity = act;
@@ -36,6 +37,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
         Collections.sort(requestList, new Comparator<RequestMessage>() {
             DateFormat f = new SimpleDateFormat(
                     "MMM d, yyyy hh:mm aa", java.util.Locale.getDefault());
+
             @Override
             public int compare(RequestMessage o1, RequestMessage o2) {
                 int ret = 0;
@@ -48,6 +50,20 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             }
         });
         notifyDataSetChanged();
+    }
+
+    public void filter(String subj_filtr) {
+        filterList.clear();
+        if (subj_filtr.equals("All")) {
+            filterList = requestList;
+        } else {
+            for (RequestMessage req : requestList) {
+                if (req.subj.equals(subj_filtr)) {
+                    filterList.add(req);
+                }
+            }
+        }
+
     }
 
     public void addRequest(RequestMessage request) {
