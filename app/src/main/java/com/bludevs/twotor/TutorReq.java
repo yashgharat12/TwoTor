@@ -27,7 +27,7 @@ import java.util.Locale;
 import java.util.UUID;
 
 public class TutorReq extends AppCompatActivity {
-    public String final_topic, final_desc, final_subj, final_date;
+    public String final_topic, final_desc, final_subj, final_date, final_ID;
     Spinner subjSpin;
     private SwitchDateTimeDialogFragment dateTimeFragment;
     private FirebaseApp app;
@@ -65,12 +65,14 @@ public class TutorReq extends AppCompatActivity {
                 final_desc = desc.getText().toString();
                 final_subj = subjSpin.getSelectedItem().toString();
                 final_date = dateText.getText().toString();
+                final_ID = UUID.randomUUID().toString();
 
                 RequestMessage request = new RequestMessage(
                         SaveSharedPreferences.getProf(TutorReq.this),
                         SaveSharedPreferences.getName(TutorReq.this),
                         final_topic, final_desc, final_subj, final_date,
-                        UUID.randomUUID().toString());
+                        final_ID);
+                Log.i("NUMERIC_ID", final_ID);
 
                 ref.push().setValue(request);
                 ref.addChildEventListener(new ChildEventListener() {
