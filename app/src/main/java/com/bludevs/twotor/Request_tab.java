@@ -64,7 +64,6 @@ public class Request_tab extends Fragment {
         app = FirebaseApp.getInstance();
         database = FirebaseDatabase.getInstance(app);
         ref = database.getReference("requests");
-        ref.keepSynced(true);
         rv.setAdapter(adapt);
 
 

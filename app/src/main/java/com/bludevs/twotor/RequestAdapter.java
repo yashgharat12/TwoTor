@@ -2,7 +2,6 @@ package com.bludevs.twotor;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +32,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
         return activity;
     }
 
-    public static void sortRequests(List<RequestMessage> list){
-        Collections.sort(list, new Comparator<RequestMessage>() {
+    public void sortRequests() {
+        Collections.sort(requestList, new Comparator<RequestMessage>() {
             DateFormat f = new SimpleDateFormat(
                     "MMM d, yyyy hh:mm aa", java.util.Locale.getDefault());
             @Override
@@ -48,12 +47,13 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
                 return ret;
             }
         });
+        notifyDataSetChanged();
     }
 
     public void addRequest(RequestMessage request) {
         requestList.add(request);
         notifyItemInserted(requestList.size());
-        //sortRequests(requestList);
+        sortRequests();
     }
 
     public Boolean checkList(RequestMessage rm) {
@@ -79,7 +79,6 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
     @Override
     public void onBindViewHolder(RequestViewHolder holder, int position) {
         RequestMessage rm = requestList.get(position);
-        Log.i("HELLO:", requestList.get(position).subj);
         holder.bind(rm);
     }
 
