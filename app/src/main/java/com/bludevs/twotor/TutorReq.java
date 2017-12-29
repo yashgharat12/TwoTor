@@ -66,6 +66,14 @@ public class TutorReq extends AppCompatActivity {
                 final_date = dateText.getText().toString();
                 final_ID = UUID.randomUUID().toString();
 
+                if (final_topic.equals("")) {
+
+                } else if (final_subj.equals("")) {
+
+                } else if (final_date.equals("")) {
+
+                }
+
                 RequestMessage request = new RequestMessage(
                         SaveSharedPreferences.getProf(TutorReq.this),
                         SaveSharedPreferences.getName(TutorReq.this),
