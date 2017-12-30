@@ -36,7 +36,6 @@
         android:layout_marginTop="8dp"
         android:background="@null"
         android:src="@mipmap/ic_filter"
-        android:onClick="showPopup"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.976"

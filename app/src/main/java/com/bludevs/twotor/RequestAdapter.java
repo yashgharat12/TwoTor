@@ -49,17 +49,20 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
                 return ret;
             }
         });
+        filterList = requestList;
         notifyDataSetChanged();
     }
 
-    public void filter(String subj_filtr) {
+    public void filter(ArrayList<String> subj_filtr) {
         filterList.clear();
-        if (subj_filtr.equals("All")) {
+        if (subj_filtr.size() == 10) {
             filterList = requestList;
         } else {
-            for (RequestMessage req : requestList) {
-                if (req.subj.equals(subj_filtr)) {
-                    filterList.add(req);
+            for (int i = 0; i < subj_filtr.size(); i++) {
+                for (RequestMessage req : requestList) {
+                    if (req.subj.equals(subj_filtr)) {
+                        filterList.add(req);
+                    }
                 }
             }
         }
@@ -94,7 +97,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
 
     @Override
     public void onBindViewHolder(RequestViewHolder holder, int position) {
-        RequestMessage rm = requestList.get(position);
+        RequestMessage rm = filterList.get(position);
         holder.bind(rm);
     }
 

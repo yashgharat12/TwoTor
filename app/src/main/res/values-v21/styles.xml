@@ -14,9 +14,10 @@
         <item name="android:textColorHint">@color/colorAccent</item>
     </style>
 
-    <style name="popupMenuStyle" parent="TwoTor">
+    <style name="AlertDialog" parent= "TwoTor">
+        <item name="android:background">@color/colorAccent</item>
         <item name="android:textColor">@android:color/background_dark</item>
-        <item name="android:itemBackground">@color/colorAccent</item>
+        <item name="android:colorAccent"> @color/colorAccent</item>
     </style>
 
 </resources>

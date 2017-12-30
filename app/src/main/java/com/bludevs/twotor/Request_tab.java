@@ -1,15 +1,15 @@
 package com.bludevs.twotor;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -17,6 +17,8 @@ import android.widget.ImageButton;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 
 public class Request_tab extends Fragment {
@@ -29,6 +31,10 @@ public class Request_tab extends Fragment {
     private FirebaseApp app;
     private FirebaseDatabase database;
     private DatabaseReference ref;
+    private String[] listItems;
+    private boolean[] checkedItems;
+    private ArrayList<Integer> mUserItems = new ArrayList<>();
+    private ArrayList<String> cur_items = new ArrayList<>();
 
     private OnFragmentInteractionListener mListener;
 
@@ -70,25 +76,54 @@ public class Request_tab extends Fragment {
         ref = database.getReference("requests");
         rv.setAdapter(adapt);
 
-        ImageButton bFilter = (ImageButton) rootView.findViewById(R.id.bFilter);
+        listItems = getResources().getStringArray(R.array.Subjects_array);
+        checkedItems = new boolean[listItems.length];
+
+        final ImageButton bFilter = (ImageButton) rootView.findViewById(R.id.bFilter);
         bFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPopup(v);
+                Context wrap = new ContextThemeWrapper(getContext(),R.style.AlertDialog);
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(wrap);
+                mBuilder.setTitle("Subjects");
+                mBuilder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        if(isChecked){
+                            if(!mUserItems.contains(which)){
+                                mUserItems.add(which);
+                            } else {
+                                mUserItems.remove(which);
+                            }
+                        }
+                    }
+                });
+
+                mBuilder.setCancelable(false);
+                mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        for(int i = 0; i < mUserItems.size(); i++){
+                            cur_items.add(listItems[mUserItems.get(i)]);
+                        }
+                        adapt.filter(cur_items);
+
+                    }
+                });
+                mBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog d = mBuilder.create();
+                d.show();
             }
         });
 
 
         return rootView;
-    }
-
-    public void showPopup(View v){
-        Context wrap = new ContextThemeWrapper(getContext(),R.style.popupMenuStyle);
-        PopupMenu pop = new PopupMenu(wrap, v);
-        MenuInflater inflater = pop.getMenuInflater();
-        inflater.inflate(R.menu.pop_menu,pop.getMenu());
-        pop.show();
-
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -119,4 +154,5 @@ public class Request_tab extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }
