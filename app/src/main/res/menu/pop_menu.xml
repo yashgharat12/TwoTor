@@ -12,4 +12,14 @@
         android:title="Geometry" />
     <item android:id="@+id/AlgII"
         android:title="Algebra II" />
+    <item android:id="@+id/Pre_Calc"
+        android:title="Pre-Calculus" />
+    <item android:id="@+id/Calculus"
+        android:title="Calculus" />
+    <item android:id="@+id/Stats"
+        android:title="Statistics" />
+    <item android:id="@+id/Humanities"
+        android:title="Humanities" />
+    <item android:id="@+id/Electives"
+        android:title="Electives" />
 </menu>
