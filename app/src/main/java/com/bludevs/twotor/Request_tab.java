@@ -5,10 +5,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
@@ -66,8 +70,25 @@ public class Request_tab extends Fragment {
         ref = database.getReference("requests");
         rv.setAdapter(adapt);
 
+        ImageButton bFilter = (ImageButton) rootView.findViewById(R.id.bFilter);
+        bFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopup(v);
+            }
+        });
+
 
         return rootView;
+    }
+
+    public void showPopup(View v){
+        Context wrap = new ContextThemeWrapper(getContext(),R.style.popupMenuStyle);
+        PopupMenu pop = new PopupMenu(wrap, v);
+        MenuInflater inflater = pop.getMenuInflater();
+        inflater.inflate(R.menu.pop_menu,pop.getMenu());
+        pop.show();
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

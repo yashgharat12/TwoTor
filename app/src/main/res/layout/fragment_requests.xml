@@ -27,6 +27,7 @@
     </LinearLayout>
 
     <ImageButton
+        android:id="@+id/bFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -35,6 +36,7 @@
         android:layout_marginTop="8dp"
         android:background="@null"
         android:src="@mipmap/ic_filter"
+        android:onClick="showPopup"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.976"
