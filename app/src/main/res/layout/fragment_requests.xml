@@ -34,7 +34,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@color/cardview_dark_background"
-        android:src="@android:drawable/ic_menu_add"
+        android:src="@mipmap/ic_filter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.976"
