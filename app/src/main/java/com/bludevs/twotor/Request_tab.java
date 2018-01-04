@@ -1,8 +1,6 @@
 package com.bludevs.twotor;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -83,7 +81,7 @@ public class Request_tab extends Fragment {
         }
 
         final ImageButton bFilter = (ImageButton) rootView.findViewById(R.id.bFilter);
-        bFilter.setOnClickListener(new View.OnClickListener() {
+        /*bFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext(), R.style.AlertDialog);
@@ -122,7 +120,7 @@ public class Request_tab extends Fragment {
                 AlertDialog d = mBuilder.create();
                 d.show();
             }
-        });
+        });*/
 
 
         return rootView;

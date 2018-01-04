@@ -1,9 +1,11 @@
 package com.bludevs.twotor;
 
+import android.content.DialogInterface;
 import android.icu.text.SimpleDateFormat;
 import android.icu.util.Calendar;
 import android.icu.util.GregorianCalendar;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -65,55 +67,93 @@ public class TutorReq extends AppCompatActivity {
                 final_subj = subjSpin.getSelectedItem().toString();
                 final_date = dateText.getText().toString();
                 final_ID = UUID.randomUUID().toString();
+                Boolean infochk = true;
 
                 if (final_topic.equals("")) {
+                    infochk = false;
+                    AlertDialog.Builder b = new AlertDialog.Builder(TutorReq.this);
+                    b.setTitle("Warning");
+                    b.setMessage("Please enter a topic");
+                    b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    b.create();
+                    b.show();
 
                 } else if (final_subj.equals("")) {
+                    infochk = false;
+                    AlertDialog.Builder b = new AlertDialog.Builder(TutorReq.this);
+                    b.setTitle("Warning");
+                    b.setMessage("Please choose a subject");
+                    b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    b.create();
+                    b.show();
 
                 } else if (final_date.equals("")) {
+                    infochk = false;
+                    AlertDialog.Builder b = new AlertDialog.Builder(TutorReq.this);
+                    b.setTitle("Warning");
+                    b.setMessage("Please choose a date");
+                    b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    b.create();
+                    b.show();
 
                 }
+                if (infochk) {
+                    RequestMessage request = new RequestMessage(
+                            SaveSharedPreferences.getProf(TutorReq.this),
+                            SaveSharedPreferences.getName(TutorReq.this),
+                            final_topic, final_desc, final_subj, final_date,
+                            final_ID);
+                    Log.i("NUMERIC_ID", final_ID);
 
-                RequestMessage request = new RequestMessage(
-                        SaveSharedPreferences.getProf(TutorReq.this),
-                        SaveSharedPreferences.getName(TutorReq.this),
-                        final_topic, final_desc, final_subj, final_date,
-                        final_ID);
-                Log.i("NUMERIC_ID", final_ID);
+                    ref.push().setValue(request);
+                    ref.addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(DataSnapshot snapshot, String s) {
+                            RequestMessage rm = snapshot.getValue(RequestMessage.class);
+                            RequestAdapter adapt = Request_tab.getAdapter();
+                            if (!adapt.checkList(rm)) {
+                                adapt.addRequest(rm);
+                            }
 
-                ref.push().setValue(request);
-                ref.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot snapshot, String s) {
-                        RequestMessage rm = snapshot.getValue(RequestMessage.class);
-                        RequestAdapter adapt = Request_tab.getAdapter();
-                        if (!adapt.checkList(rm)) {
-                            adapt.addRequest(rm);
                         }
 
-                    }
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                        }
 
-                    }
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot) {
 
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+                        }
 
-                    }
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                        }
 
-                    }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-                finish();
+                        }
+                    });
+                    finish();
+                }
             }
         });
 
