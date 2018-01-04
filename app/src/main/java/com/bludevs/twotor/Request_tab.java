@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,17 +73,20 @@ public class Request_tab extends Fragment {
         app = FirebaseApp.getInstance();
         database = FirebaseDatabase.getInstance(app);
         ref = database.getReference("requests");
+        ref.keepSynced(true);
         rv.setAdapter(adapt);
 
         listItems = getResources().getStringArray(R.array.Subjects_array);
         checkedItems = new boolean[listItems.length];
+        for (int i = 0; i < listItems.length; i++) {
+            checkedItems[i] = true;
+        }
 
         final ImageButton bFilter = (ImageButton) rootView.findViewById(R.id.bFilter);
         bFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context wrap = new ContextThemeWrapper(getContext(),R.style.AlertDialog);
-                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(wrap);
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext(), R.style.AlertDialog);
                 mBuilder.setTitle("Subjects");
                 mBuilder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
@@ -113,8 +115,8 @@ public class Request_tab extends Fragment {
                 });
                 mBuilder.setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
                     }
                 });
                 AlertDialog d = mBuilder.create();

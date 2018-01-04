@@ -75,6 +75,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
         sortRequests();
     }
 
+
     public Boolean checkList(RequestMessage rm) {
         Boolean chk = false;
         for (int i = 0; i < requestList.size(); i++) {

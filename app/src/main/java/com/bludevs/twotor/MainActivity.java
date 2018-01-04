@@ -11,8 +11,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity implements Request_tab.OnFragmentInteractionListener, Forum_tab.OnFragmentInteractionListener {
+    private static RequestAdapter adapt;
     ViewPager viewPager;
+    private FirebaseApp app;
+    private FirebaseDatabase database;
+    private DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +67,41 @@ public class MainActivity extends AppCompatActivity implements Request_tab.OnFra
             }
         });
 
+        app = FirebaseApp.getInstance();
+        database = FirebaseDatabase.getInstance(app);
+        ref = database.getReference("requests");
+        ref.keepSynced(true);
+        ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String s) {
+                RequestMessage rm = snapshot.getValue(RequestMessage.class);
+                RequestAdapter adapt = Request_tab.getAdapter();
+                if (!adapt.checkList(rm)) {
+                    adapt.addRequest(rm);
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         bSettings.setOnClickListener(new View.OnClickListener() {
             @Override
