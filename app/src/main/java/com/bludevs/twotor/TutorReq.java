@@ -67,11 +67,12 @@ public class TutorReq extends AppCompatActivity {
                 final_subj = subjSpin.getSelectedItem().toString();
                 final_date = dateText.getText().toString();
                 final_ID = UUID.randomUUID().toString();
-                Boolean infochk = true;
+                boolean infochk = true;
 
                 if (final_topic.equals("")) {
                     infochk = false;
-                    AlertDialog.Builder b = new AlertDialog.Builder(TutorReq.this);
+                    AlertDialog.Builder b = new AlertDialog.Builder(TutorReq.this,
+                            R.style.AlertDialog);
                     b.setTitle("Warning");
                     b.setMessage("Please enter a topic");
                     b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -85,7 +86,8 @@ public class TutorReq extends AppCompatActivity {
 
                 } else if (final_subj.equals("")) {
                     infochk = false;
-                    AlertDialog.Builder b = new AlertDialog.Builder(TutorReq.this);
+                    AlertDialog.Builder b = new AlertDialog.Builder(TutorReq.this,
+                            R.style.AlertDialog);
                     b.setTitle("Warning");
                     b.setMessage("Please choose a subject");
                     b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -99,9 +101,10 @@ public class TutorReq extends AppCompatActivity {
 
                 } else if (final_date.equals("")) {
                     infochk = false;
-                    AlertDialog.Builder b = new AlertDialog.Builder(TutorReq.this);
+                    AlertDialog.Builder b = new AlertDialog.Builder(TutorReq.this,
+                            R.style.AlertDialog);
                     b.setTitle("Warning");
-                    b.setMessage("Please choose a date");
+                    b.setMessage("Please select a date");
                     b.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -110,7 +113,6 @@ public class TutorReq extends AppCompatActivity {
                     });
                     b.create();
                     b.show();
-
                 }
                 if (infochk) {
                     RequestMessage request = new RequestMessage(

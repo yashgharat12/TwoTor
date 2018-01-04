@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
@@ -80,8 +79,8 @@ public class Request_tab extends Fragment {
             checkedItems[i] = true;
         }
 
-        final ImageButton bFilter = (ImageButton) rootView.findViewById(R.id.bFilter);
-        /*bFilter.setOnClickListener(new View.OnClickListener() {
+        /*final ImageButton bFilter = (ImageButton) rootView.findViewById(R.id.bFilter);
+        bFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext(), R.style.AlertDialog);
