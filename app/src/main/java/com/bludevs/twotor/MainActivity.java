@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity implements Request_tab.OnFragmentInteractionListener, Forum_tab.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements Request_tab.OnFragmentInteractionListener, Resolved_tab.OnFragmentInteractionListener {
     private static RequestAdapter adapt;
     ViewPager viewPager;
     private FirebaseApp app;

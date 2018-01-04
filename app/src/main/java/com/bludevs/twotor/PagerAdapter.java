@@ -15,7 +15,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new Request_tab();
             case 1:
-                return new Forum_tab();
+                return new Resolved_tab();
             default:
                 break;
         }
