@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +23,7 @@ public class Request_tab extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static RequestAdapter adapt;
+    private static ProgressBar PBar;
     private String mParam1;
     private String mParam2;
     private FirebaseApp app;
@@ -31,7 +33,6 @@ public class Request_tab extends Fragment {
     private boolean[] checkedItems;
     private ArrayList<Integer> mUserItems = new ArrayList<>();
     private ArrayList<String> cur_items = new ArrayList<>();
-
     private OnFragmentInteractionListener mListener;
 
     public Request_tab() {
@@ -64,15 +65,17 @@ public class Request_tab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_requests,container,false);
+
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.card_list);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapt = new RequestAdapter(getActivity());
         app = FirebaseApp.getInstance();
         database = FirebaseDatabase.getInstance(app);
         ref = database.getReference("requests");
+        PBar = (ProgressBar) rootView.findViewById(R.id.PBar);
         ref.keepSynced(true);
         rv.setAdapter(adapt);
-
+        PBar.setVisibility(View.GONE);
         listItems = getResources().getStringArray(R.array.Subjects_array);
         checkedItems = new boolean[listItems.length];
         for (int i = 0; i < listItems.length; i++) {
