@@ -2,6 +2,7 @@ package com.bludevs.twotor;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,7 +122,14 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
             card_desc = (TextView) itemView.findViewById(R.id.card_desc);
             card_subj = (TextView) itemView.findViewById(R.id.card_subj);
             card_date = (TextView) itemView.findViewById(R.id.card_date);
+
             bAccept = (Button) itemView.findViewById(R.id.bAccept);
+            bAccept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.i("HELLO", card_topic.getText().toString());
+                }
+            });
         }
 
         public void bind(RequestMessage rm) {
