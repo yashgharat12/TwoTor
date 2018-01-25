@@ -23,7 +23,7 @@ public class Request_tab extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static RequestAdapter adapt;
-    private static ProgressBar PBar;
+    public static ProgressBar PBar;
     private String mParam1;
     private String mParam2;
     private FirebaseApp app;
@@ -75,7 +75,6 @@ public class Request_tab extends Fragment {
         PBar = (ProgressBar) rootView.findViewById(R.id.PBar);
         ref.keepSynced(true);
         rv.setAdapter(adapt);
-        PBar.setVisibility(View.GONE);
         listItems = getResources().getStringArray(R.array.Subjects_array);
         checkedItems = new boolean[listItems.length];
         for (int i = 0; i < listItems.length; i++) {

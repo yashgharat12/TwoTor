@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -78,7 +79,10 @@ public class MainActivity extends AppCompatActivity implements Request_tab.OnFra
                 RequestAdapter adapt = Request_tab.getAdapter();
                 if (!adapt.checkList(rm)) {
                     adapt.addRequest(rm);
+                    Log.i("UPDATE","STUCK IN LOOP");
                 }
+                Request_tab.PBar.setVisibility(View.GONE);
+                Log.i("UPDATE", "Exited Loop");
 
             }
 
