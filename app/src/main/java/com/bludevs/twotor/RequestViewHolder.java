@@ -52,8 +52,10 @@ public class RequestViewHolder extends RecyclerView.ViewHolder {
                     public void onChildAdded(DataSnapshot snapshot, String s) {
                         RequestMessage rm = snapshot.getValue(RequestMessage.class);
                         AccAdapter adapt = Accepted_tab.getAdapter();
+                        RequestAdapter rad = Request_tab.getAdapter();
                         if (!adapt.checklist(rm)) {
                             adapt.addAcc(rm);
+                            rad.removeRequest(rm);
                         }
                     }
 

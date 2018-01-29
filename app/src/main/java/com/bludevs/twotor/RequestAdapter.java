@@ -70,6 +70,18 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestViewHolder> {
         sortRequests();
     }
 
+    public void removeRequest(RequestMessage res){
+        int pos= 0;
+        for(int i = 0; i<requestList.size(); i++){
+            if(requestList.get(i).equals(res)){
+                pos = i;
+            }
+        }
+        requestList.remove(res);
+        notifyItemRemoved(pos);
+        sortRequests();
+    }
+
     public static RequestMessage findRequest(String identity){
         RequestMessage res = null;
         for(int i =0; i< requestList.size(); i++){
