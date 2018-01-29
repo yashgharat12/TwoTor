@@ -15,9 +15,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-/**
- * Created by syre on 1/27/18.
- */
 public class RequestViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView card_dp;
