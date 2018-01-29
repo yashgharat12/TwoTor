@@ -9,6 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
@@ -25,6 +30,10 @@ public class Accepted_tab extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static AccAdapter adapt;
+    private FirebaseApp app;
+    private FirebaseDatabase database;
+    private DatabaseReference ref;
+    private ProgressBar PBar;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -75,6 +84,13 @@ public class Accepted_tab extends Fragment {
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.acc_list);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapt = new AccAdapter(getActivity());
+        app = FirebaseApp.getInstance();
+        database = FirebaseDatabase.getInstance(app);
+        ref = database.getReference("accepted");
+        PBar = (ProgressBar) rootView.findViewById(R.id.PBar_acc);
+        ref.keepSynced(true);
+        rv.setAdapter(adapt);
+
         return rootView;
     }
 

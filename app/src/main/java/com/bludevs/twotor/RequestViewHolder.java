@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RequestViewHolder extends RecyclerView.ViewHolder {
 
@@ -23,7 +24,7 @@ public class RequestViewHolder extends RecyclerView.ViewHolder {
     private Button bAccept;
     private FirebaseApp app;
     private FirebaseDatabase database;
-    private DatabaseReference ref;
+    private DatabaseReference ref_acc, ref_req;
 
     public RequestViewHolder(View itemView) {
         super(itemView);
@@ -36,39 +37,28 @@ public class RequestViewHolder extends RecyclerView.ViewHolder {
 
         app = FirebaseApp.getInstance();
         database = FirebaseDatabase.getInstance(app);
-        ref = database.getReference("accepted");
+        ref_acc = database.getReference("accepted");
+        ref_req = database.getReference("requests");
 
         bAccept = (Button) itemView.findViewById(R.id.bAccept);
         bAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 RequestMessage rm = RequestAdapter.findRequest(card_ID);
-                ref.push().setValue(rm);
-                ref.addChildEventListener(new ChildEventListener() {
+                ref_req.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onChildAdded(DataSnapshot snapshot, String s) {
-                        RequestMessage rm = snapshot.getValue(RequestMessage.class);
-                        AccAdapter adapt = Accepted_tab.getAdapter();
-                        RequestAdapter rad = Request_tab.getAdapter();
-                        if (!adapt.checklist(rm)) {
-                            adapt.addAcc(rm);
-                            rad.removeRequest(rm);
-                        }
-                    }
+                    public void onDataChange(DataSnapshot snapshot) {
+                        ref_acc.setValue(snapshot.getValue(), new DatabaseReference.CompletionListener(){
 
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
+                            @Override
+                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                if (databaseError != null) {
+                                    Log.e("COPY", "Failed");
+                                } else {
+                                    Log.e("COPY", "Success");
+                                }
+                            }
+                        });
                     }
 
                     @Override
