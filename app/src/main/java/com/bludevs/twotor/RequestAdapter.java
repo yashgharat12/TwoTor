@@ -70,6 +70,10 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestViewHolder> {
         sortRequests();
     }
 
+    public void getRequest(String identity){
+
+    }
+
 
     public boolean checkList(RequestMessage rm) {
         boolean chk = false;
