@@ -71,8 +71,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestViewHolder> {
     }
 
 
-    public Boolean checkList(RequestMessage rm) {
-        Boolean chk = false;
+    public boolean checkList(RequestMessage rm) {
+        boolean chk = false;
         for (int i = 0; i < requestList.size(); i++) {
             RequestMessage entry = requestList.get(i);
             if (getItemCount() > 0 && entry.ID.equals(rm.ID)) {
