@@ -17,7 +17,7 @@ import java.util.List;
 public class RequestAdapter extends RecyclerView.Adapter<RequestViewHolder> {
 
     private static Activity activity;
-    private List<RequestMessage> requestList = new ArrayList<>();
+    private static List<RequestMessage> requestList = new ArrayList<>();
     private List<RequestMessage> filterList = new ArrayList<>();
 
     public RequestAdapter(Activity act) {
@@ -70,8 +70,14 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestViewHolder> {
         sortRequests();
     }
 
-    public void getRequest(String identity){
-
+    public static RequestMessage findRequest(String identity){
+        RequestMessage res = null;
+        for(int i =0; i< requestList.size(); i++){
+            if(requestList.get(i).ID.equals(identity)){
+                res = requestList.get(i);
+            }
+        }
+        return res;
     }
 
 
