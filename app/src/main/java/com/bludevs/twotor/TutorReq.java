@@ -127,9 +127,14 @@ public class TutorReq extends AppCompatActivity {
                         @Override
                         public void onChildAdded(DataSnapshot snapshot, String s) {
                             RequestMessage rm = snapshot.getValue(RequestMessage.class);
-                            RequestAdapter adapt = Request_tab.getAdapter();
-                            if (!adapt.checkList(rm)) {
-                                adapt.addRequest(rm);
+                            String key = snapshot.getKey();
+                            rm.setKey(key);
+                            RequestAdapter req_adapt = Request_tab.getAdapter();
+                            AccAdapter acc_adapt = Accepted_tab.getAdapter();
+                            if (!req_adapt.checkList(rm) && rm.resolved == false) {
+                                req_adapt.addRequest(rm);
+                            } else if (!acc_adapt.checkList(rm) && rm.resolved == true) {
+                                acc_adapt.addAcc(rm);
                             }
 
                         }

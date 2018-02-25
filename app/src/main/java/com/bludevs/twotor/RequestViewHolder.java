@@ -36,8 +36,7 @@ public class RequestViewHolder extends RecyclerView.ViewHolder {
         card_date = (TextView) itemView.findViewById(R.id.card_date);
 
         app = FirebaseApp.getInstance();
-        database = FirebaseDatabase.getInstance(app);
-        ref_acc = database.getReference("accepted");
+        database = FirebaseDatabase.getInstance(app);;
         ref_req = database.getReference("requests");
 
         bAccept = (Button) itemView.findViewById(R.id.bAccept);
@@ -45,27 +44,16 @@ public class RequestViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 RequestMessage rm = RequestAdapter.findRequest(card_ID);
-                ref_req.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot snapshot) {
-                        ref_acc.setValue(snapshot.getValue(), new DatabaseReference.CompletionListener(){
-
-                            @Override
-                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                if (databaseError != null) {
-                                    Log.e("COPY", "Failed");
-                                } else {
-                                    Log.e("COPY", "Success");
-                                }
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+                rm.msgStatus(true);
+                Log.i("Status", RequestAdapter.findRequest(card_ID).key);
+                DatabaseReference ch = ref_req.child(rm.key).child("resolved");
+                ch.setValue(true);
+                RequestAdapter req_adapt = Request_tab.getAdapter();
+                AccAdapter acc_adapt = Accepted_tab.getAdapter();
+                acc_adapt.addAcc(rm);
+                req_adapt.removeRequest(rm);
+                req_adapt.updateList();
+                acc_adapt.updateList();
             }
         });
     }

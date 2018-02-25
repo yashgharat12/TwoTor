@@ -49,9 +49,14 @@ public class AccAdapter extends RecyclerView.Adapter<RequestViewHolder> {
     public void addAcc(RequestMessage acc){
         accList.add(acc);
         notifyItemInserted(accList.size());
+        sortAcc();
     }
 
-    public boolean checklist(RequestMessage rm){
+    public void updateList(){
+        notifyDataSetChanged();
+    }
+
+    public boolean checkList(RequestMessage rm){
         boolean chk = false;
         for(int i = 0; i < accList.size(); i++){
             RequestMessage entry = accList.get(i);

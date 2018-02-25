@@ -33,7 +33,7 @@ public class Accepted_tab extends Fragment {
     private FirebaseApp app;
     private FirebaseDatabase database;
     private DatabaseReference ref;
-    private ProgressBar PBar;
+    public static ProgressBar PBar;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -45,14 +45,6 @@ public class Accepted_tab extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Accepted_tab.
-     */
     // TODO: Rename and change types and number of parameters
     public static Accepted_tab newInstance(String param1, String param2) {
         Accepted_tab fragment = new Accepted_tab();

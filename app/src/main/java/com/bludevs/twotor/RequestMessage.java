@@ -3,7 +3,7 @@ package com.bludevs.twotor;
 
 public class RequestMessage {
 
-    protected String imgURL, name, topic, desc, date, subj, ID;
+    protected String imgURL, name, topic, desc, date, subj, ID, key;
 
     protected Boolean resolved = false;
 
@@ -24,5 +24,8 @@ public class RequestMessage {
 
     public void msgStatus(Boolean b){
         this.resolved = b;
+    }
+    public void setKey(String k){
+        key = k;
     }
 }

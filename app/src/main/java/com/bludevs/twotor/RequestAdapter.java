@@ -92,6 +92,10 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestViewHolder> {
         return res;
     }
 
+    public void updateList(){
+        notifyDataSetChanged();
+    }
+
 
     public boolean checkList(RequestMessage rm) {
         boolean chk = false;
