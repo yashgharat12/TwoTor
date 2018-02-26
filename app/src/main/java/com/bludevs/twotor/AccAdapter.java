@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class AccAdapter extends RecyclerView.Adapter<RequestViewHolder> {
+public class AccAdapter extends RecyclerView.Adapter<AccViewHolder> {
     public static Activity activity;
     private ArrayList<RequestMessage> accList = new ArrayList<>();
     private ArrayList<RequestMessage> sortedList = new ArrayList<>();
@@ -68,15 +68,15 @@ public class AccAdapter extends RecyclerView.Adapter<RequestViewHolder> {
     };
 
     @Override
-    public RequestViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AccViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.cards,parent,false);
-        return new RequestViewHolder(itemView);
+        return new AccViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(RequestViewHolder holder, int position) {
+    public void onBindViewHolder(AccViewHolder holder, int position) {
         RequestMessage rm = sortedList.get(position);
         holder.bind(rm);
     }

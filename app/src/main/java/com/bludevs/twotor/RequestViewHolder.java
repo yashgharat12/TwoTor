@@ -24,7 +24,7 @@ public class RequestViewHolder extends RecyclerView.ViewHolder {
     private Button bAccept;
     private FirebaseApp app;
     private FirebaseDatabase database;
-    private DatabaseReference ref_acc, ref_req;
+    private DatabaseReference ref_req;
 
     public RequestViewHolder(View itemView) {
         super(itemView);
