@@ -15,7 +15,7 @@ import java.util.Comparator;
 
 public class AccAdapter extends RecyclerView.Adapter<AccViewHolder> {
     public static Activity activity;
-    private ArrayList<RequestMessage> accList = new ArrayList<>();
+    private static ArrayList<RequestMessage> accList = new ArrayList<>();
     private ArrayList<RequestMessage> sortedList = new ArrayList<>();
 
     public AccAdapter(Activity act) {
@@ -52,6 +52,18 @@ public class AccAdapter extends RecyclerView.Adapter<AccViewHolder> {
         sortAcc();
     }
 
+    public void removeRequest(RequestMessage res){
+        int pos= 0;
+        for(int i = 0; i<accList.size(); i++){
+            if(accList.get(i).equals(res)){
+                pos = i;
+            }
+        }
+        accList.remove(res);
+        notifyItemRemoved(pos);
+        sortAcc();
+    }
+
     public void updateList(){
         notifyDataSetChanged();
     }
@@ -71,8 +83,18 @@ public class AccAdapter extends RecyclerView.Adapter<AccViewHolder> {
     public AccViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.cards,parent,false);
+                .inflate(R.layout.acc_card,parent,false);
         return new AccViewHolder(itemView);
+    }
+
+    public static RequestMessage findRequest(String identity){
+        RequestMessage res = null;
+        for(int i =0; i< accList.size(); i++){
+            if(accList.get(i).ID.equals(identity)){
+                res = accList.get(i);
+            }
+        }
+        return res;
     }
 
     @Override
