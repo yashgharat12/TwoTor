@@ -27,11 +27,9 @@ public class ForumViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         this.activity = activity;
 
-        name = (TextView) itemView.findViewById(android.R.id.text1);
-        message = (TextView) itemView.findViewById(android.R.id.text2);
-        img = new ImageView(activity);
-
-        ((ViewGroup)itemView).addView(img);
+        name = (TextView) itemView.findViewById(R.id.Text1);
+        message = (TextView) itemView.findViewById(R.id.Text2);
+        img = (ImageView) itemView.findViewById(R.id.forum_prof);
     }
 
     public void bind(ForumMessage fm){

@@ -32,7 +32,7 @@ public class ForumAdapter extends RecyclerView.Adapter<ForumViewHolder> {
     @Override
     public ForumViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ForumViewHolder(activity.getLayoutInflater()
-                .inflate(android.R.layout.two_line_list_item, parent, false),activity);
+                .inflate(R.layout.forum_row, parent, false),activity);
     }
 
     @Override
