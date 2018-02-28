@@ -16,6 +16,8 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 return new Request_tab();
             case 1:
                 return new Accepted_tab();
+            case 2:
+                return new Forum_tab();
             default:
                 break;
         }
@@ -24,6 +26,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 }
