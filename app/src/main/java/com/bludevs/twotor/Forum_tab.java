@@ -9,21 +9,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.UUID;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Forum_tab.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Forum_tab#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Forum_tab extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private ForumAdapter adapt;
+    private FirebaseApp app;
+    private FirebaseDatabase database;
+    private DatabaseReference ref;
+    private Button send;
+    private EditText msgText;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -32,18 +40,8 @@ public class Forum_tab extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public Forum_tab() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Forum_tab.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Forum_tab newInstance(String param1, String param2) {
         Forum_tab fragment = new Forum_tab();
         Bundle args = new Bundle();
@@ -70,9 +68,50 @@ public class Forum_tab extends Fragment {
 
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.forum_List);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapt = new ForumAdapter(getActivity());
+        app = FirebaseApp.getInstance();
+        database = FirebaseDatabase.getInstance(app);
+        ref = database.getReference("forum");
+        msgText = (EditText) rootView.findViewById(R.id.messageTxt);
+        send = (Button) rootView.findViewById(R.id.sendBtn);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ForumMessage fm = new ForumMessage(
+                        SaveSharedPreferences.getProf(getActivity()),
+                        SaveSharedPreferences.getName(getActivity()),
+                        UUID.randomUUID().toString(), msgText.getText().toString());
 
+                ref.push().setValue(fm);
+                msgText.setText("");
+            }
+        });
 
+        ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot snapshot, String s) {
+                ForumMessage fm = snapshot.getValue(ForumMessage.class);
+                adapt.addMessage(fm);
+            }
 
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        rv.setAdapter(adapt);
         return rootView;
     }
 

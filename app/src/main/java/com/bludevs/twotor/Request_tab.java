@@ -69,10 +69,10 @@ public class Request_tab extends Fragment {
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.card_list);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapt = new RequestAdapter(getActivity());
+        PBar = (ProgressBar) rootView.findViewById(R.id.PBar);
         app = FirebaseApp.getInstance();
         database = FirebaseDatabase.getInstance(app);
         ref = database.getReference("requests");
-        PBar = (ProgressBar) rootView.findViewById(R.id.PBar);
         ref.keepSynced(true);
         rv.setAdapter(adapt);
         listItems = getResources().getStringArray(R.array.Subjects_array);
